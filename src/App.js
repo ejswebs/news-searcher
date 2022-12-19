@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import { Box } from "@material-ui/core";
+
+import ResultsTable from "./components/ResultsTable";
+import Searcher from "./components/Searcher";
+import Header from "./components/Header";
 
 function App() {
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Searcher
+        setArticles={setArticles}
+        setLoading={setLoading}
+        setError={setError}
+        setCount={setCount}
+      />
+      <ResultsTable
+        articles={articles}
+        loading={loading}
+        error={error}
+        count={count}
+      />
+    </>
   );
 }
 

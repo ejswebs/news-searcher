@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-
 import { Box, Button, makeStyles, TextField } from "@material-ui/core";
+
 import { newsQuery } from "../utils/newsQuery";
 
 const useStyles = makeStyles({
@@ -38,8 +37,6 @@ const Searcher = ({
   setSearch,
 }) => {
   const { searcherInput, searcherContainer, searcherButton } = useStyles();
-
-  console.log(search);
 
   const onSearch = () => {
     setLoading(true);

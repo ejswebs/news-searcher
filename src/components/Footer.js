@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Box, makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -11,6 +9,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     padding: "5px 30px 0 30px",
     boxSizing: "border-box",
+    "& a": { textDecoration: "none !important", color: "#000" },
   },
 });
 
@@ -19,7 +18,13 @@ const Footer = () => {
 
   return (
     <Box className={footerBox}>
-      <Typography>GitHub Repository</Typography>
+      <Typography
+        component="a"
+        target="_blank"
+        href="https://github.com/ejswebs?tab=repositories"
+      >
+        GitHub Repository
+      </Typography>
       <Typography>© Enzo Steier - Asesoramiento y Servicios</Typography>
     </Box>
   );

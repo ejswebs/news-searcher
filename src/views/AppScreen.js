@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "../App.css";
+import { useState } from "react";
 
 import { Box, makeStyles } from "@material-ui/core";
 
+import "../App.css";
 import ResultsTable from "../components/ResultsTable";
 import Searcher from "../components/Searcher";
 import Header from "../components/Header";
@@ -27,8 +27,6 @@ const SearcherScreen = () => {
   const [search, setSearch] = useState();
 
   const { view, appContainer } = useStyles();
-
-  console.log(error);
 
   return (
     <Box className={view}>

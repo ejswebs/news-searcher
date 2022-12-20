@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 
 import { Box, Button, makeStyles, TextField } from "@material-ui/core";
-import { useNewsQuery } from "../hooks/useNewsQuery";
+import { newsQuery } from "../utils/newsQuery";
 
 const useStyles = makeStyles({
   searcherContainer: {
-    padding: "30px 0",
+    padding: "20px 10px",
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    justifyContent: "center",
     gap: "10px",
+    width: "40%",
   },
   searcherInput: {
-    width: "30%",
+    width: "80%",
     "& .MuiOutlinedInput-input": {
       backgroundColor: "white",
       borderRadius: "10px",
       height: "30px",
-      padding: "0",
+      padding: "0 10px",
     },
   },
   searcherButton: {
+    height: "30px",
     backgroundColor: "white",
     "& :hover": {
       color: "white",
@@ -28,16 +29,21 @@ const useStyles = makeStyles({
   },
 });
 
-const Searcher = ({ setArticles, setLoading, setError, setCount }) => {
+const Searcher = ({
+  setArticles,
+  setLoading,
+  setError,
+  setCount,
+  search,
+  setSearch,
+}) => {
   const { searcherInput, searcherContainer, searcherButton } = useStyles();
-
-  const [search, setSearch] = useState();
 
   console.log(search);
 
   const onSearch = () => {
     setLoading(true);
-    useNewsQuery({ search, setArticles, setLoading, setError, setCount });
+    newsQuery({ search, setArticles, setLoading, setError, setCount });
   };
 
   return (
@@ -45,6 +51,7 @@ const Searcher = ({ setArticles, setLoading, setError, setCount }) => {
       <TextField
         variant="outlined"
         className={searcherInput}
+        value={search}
         onChange={(e) => setSearch(e.target.value)}
       ></TextField>
       <Button

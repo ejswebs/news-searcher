@@ -3,18 +3,44 @@ import React from "react";
 import { AppBar, makeStyles } from "@material-ui/core";
 
 import logo from "../assets/logo.png";
+import Searcher from "./Searcher";
 
 const useStyles = makeStyles({
-  navBar: { width: "80%", backgroundColor: "#ddd" },
+  navBar: {
+    width: "80vw",
+    backgroundColor: "#ddd",
+    height: "60px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   logoStyle: { /*  height: "150px" */ width: "250px" },
 });
 
-const Header = () => {
+const Header = ({
+  count,
+  setArticles,
+  setLoading,
+  setError,
+  setCount,
+  search,
+  setSearch,
+}) => {
   const { navBar, logoStyle } = useStyles();
 
   return (
     <AppBar position="static" className={navBar}>
       <img className={logoStyle} src={logo} alt="news-searcher logo" />
+      {count && (
+        <Searcher
+          setArticles={setArticles}
+          setLoading={setLoading}
+          setError={setError}
+          setCount={setCount}
+          search={search}
+          setSearch={setSearch}
+        />
+      )}
       {/* <Toolbar>
         <IconButton
           edge="start"

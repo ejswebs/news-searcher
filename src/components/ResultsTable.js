@@ -19,15 +19,19 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Pagination } from "@material-ui/lab";
 
 //import { articles } from "../assets/responseMock.json";
-import { useNewsQuery } from "../hooks/useNewsQuery";
+import { useNewsQuery } from "../utils/newsQuery";
+import Spinner from "./Spinner";
+import ErrorScreen from "../views/ErrorScreen";
 
 const useStyles = makeStyles({
   container: {
+    boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     gap: "10px",
-    height: "80%",
+    height: "100%",
+    padding: "20px 0 10px 0",
   },
   card: {
     display: "flex",
@@ -61,9 +65,12 @@ const useStyles = makeStyles({
   paginationContainer: {
     display: "flex",
     justifyContent: "space-between",
-    width: "50%",
+    width: "100%",
+    padding: "0 30px",
+    boxSizing: "border-box",
   },
   buttonCard: { textTransform: "none" },
+  resultsBox: { overflow: "auto" },
 });
 
 const ResultsTable = ({ articles, loading, error, count }) => {
@@ -78,6 +85,7 @@ const ResultsTable = ({ articles, loading, error, count }) => {
     paginationText,
     paginationContainer,
     buttonCard,
+    resultsBox,
   } = useStyles();
 
   const [page, setPage] = useState(1);
@@ -85,13 +93,12 @@ const ResultsTable = ({ articles, loading, error, count }) => {
     setPage(p);
   };
 
-  //  console.log(articles);
-  // console.log(loading);
+  console.log(error);
 
   return loading ? (
-    <CircularProgress />
+    <Spinner />
   ) : error ? (
-    <Typography> {error}</Typography>
+    <ErrorScreen error={error} />
   ) : (
     count > 0 && (
       <Box className={container}>
@@ -121,99 +128,101 @@ const ResultsTable = ({ articles, loading, error, count }) => {
             )
           )}
         </Box>
-        {articles.length > 10
-          ? articles.slice((page - 1) * 10, page * 10).map((article) => (
-              <Button
-                className={buttonCard}
-                key={article.url}
-                href={article.url}
-                target="_blank"
-              >
-                <Card key={article.title} className={card}>
-                  <Box className={bodyCard}>
-                    <CardHeader
-                      className={cardHeader}
-                      avatar={
-                        <Avatar aria-label="recipe">
-                          {article.source.name[0]}
-                        </Avatar>
-                      }
-                      title={article.title}
-                      subheader={
-                        "Publicado el " +
-                        DateTime.fromISO(article.publishedAt).toFormat(
-                          "dd-MM-yyyy"
-                        ) +
-                        " a las " +
-                        DateTime.fromISO(article.publishedAt).toFormat(
-                          "HH:mm:ss"
-                        ) +
-                        " en " +
-                        article.source.name
-                      }
+        <Box className={resultsBox}>
+          {articles.length > 10
+            ? articles.slice((page - 1) * 10, page * 10).map((article) => (
+                <Button
+                  className={buttonCard}
+                  key={article.url}
+                  href={article.url}
+                  target="_blank"
+                >
+                  <Card key={article.title} className={card}>
+                    <Box className={bodyCard}>
+                      <CardHeader
+                        className={cardHeader}
+                        avatar={
+                          <Avatar aria-label="recipe">
+                            {article.source.name[0]}
+                          </Avatar>
+                        }
+                        title={article.title}
+                        subheader={
+                          "Publicado el " +
+                          DateTime.fromISO(article.publishedAt).toFormat(
+                            "dd-MM-yyyy"
+                          ) +
+                          " a las " +
+                          DateTime.fromISO(article.publishedAt).toFormat(
+                            "HH:mm:ss"
+                          ) +
+                          " en " +
+                          article.source.name
+                        }
+                      />
+                      <CardContent className={bodyText}>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {article.description}
+                        </Typography>
+                      </CardContent>
+                    </Box>
+                    <CardMedia
+                      className={media}
+                      image={article.urlToImage}
+                      title="Paella dish"
                     />
-                    <CardContent className={bodyText}>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        {article.description}
-                      </Typography>
-                    </CardContent>
-                  </Box>
-                  <CardMedia
-                    className={media}
-                    image={article.urlToImage}
-                    title="Paella dish"
-                  />
-                </Card>
-              </Button>
-            ))
-          : articles.map((article) => (
-              <Button
-                className={buttonCard}
-                key={article.url}
-                href={article.url}
-                target="_blank"
-              >
-                <Card key={article.title} className={card}>
-                  <Box className={bodyCard}>
-                    <CardHeader
-                      className={cardHeader}
-                      avatar={<Avatar aria-label="recipe">R</Avatar>}
-                      title={article.title}
-                      subheader={
-                        "Publicado el " +
-                        DateTime.fromISO(article.publishedAt).toFormat(
-                          "dd-MM-yyyy"
-                        ) +
-                        " a las " +
-                        DateTime.fromISO(article.publishedAt).toFormat(
-                          "HH:mm:ss"
-                        ) +
-                        " en " +
-                        article.source.name
-                      }
+                  </Card>
+                </Button>
+              ))
+            : articles.map((article) => (
+                <Button
+                  className={buttonCard}
+                  key={article.url}
+                  href={article.url}
+                  target="_blank"
+                >
+                  <Card key={article.title} className={card}>
+                    <Box className={bodyCard}>
+                      <CardHeader
+                        className={cardHeader}
+                        avatar={<Avatar aria-label="recipe">R</Avatar>}
+                        title={article.title}
+                        subheader={
+                          "Publicado el " +
+                          DateTime.fromISO(article.publishedAt).toFormat(
+                            "dd-MM-yyyy"
+                          ) +
+                          " a las " +
+                          DateTime.fromISO(article.publishedAt).toFormat(
+                            "HH:mm:ss"
+                          ) +
+                          " en " +
+                          article.source.name
+                        }
+                      />
+                      <CardContent className={bodyText}>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {article.description}
+                        </Typography>
+                      </CardContent>
+                    </Box>
+                    <CardMedia
+                      className={media}
+                      image={article.urlToImage}
+                      title="Paella dish"
                     />
-                    <CardContent className={bodyText}>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        {article.description}
-                      </Typography>
-                    </CardContent>
-                  </Box>
-                  <CardMedia
-                    className={media}
-                    image={article.urlToImage}
-                    title="Paella dish"
-                  />
-                </Card>
-              </Button>
-            ))}
+                  </Card>
+                </Button>
+              ))}
+        </Box>
       </Box>
     )
   );

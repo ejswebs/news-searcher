@@ -1,71 +1,25 @@
-# Getting Started with Create React App
+News Searcher es un buscador de noticias desarrollado en React y maquetado con mui v4.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+La app contempla los siguientes requerimientos:
 
-## Available Scripts
+✔En caso de que ocurra algún error, se presenta el mensaje correspondiente, explicando el error al usuario y dando la posibilidad de enviarlo por whatsapp al desarrollador
+✔No realiza la búsqueda a menos que el usuario haya escrito al menos 3 caracteres
+✔El botón buscar se habilita cuando el input cumpla con la condición anterior.
+✔La búsqueda puede realizarse apretando la tecla enter del teclado.
+✔Se presenta un spinner para que el usuario sepa de que se está realizando un procesamiento.
+✔En caso de que no haya resultados, se presenta un mensaje que indique que no hay resultados para la búsqueda.
+✔La búsqueda sólo se realiza en noticias en español.
 
-In the project directory, you can run:
+Por cada noticia obtenida, se presenta:
+✔ El nombre de la plataforma de origen de la noticia
+✔ El título de la noticia
+✔ La imagen de portada de la noticia
+✔ La fecha de publicación de la noticia en formato:dd-mm-aaaa - hh:mm hs valiendose de la librería Luxon
+✔ Cuando el usuario hace click sobre una noticia, la misma se abre en una nueva pestaña.
+✔ Paginación, donde se presenten 10 noticias por vez
 
-### `npm start`
+✔ El buscador esta disponible ya sea en la raíz o en la ruta /buscador.
+✔ En caso que el usuario ingrese en una url inválida, se presenta una página de 404, con el mensaje recurso no encontrado y la posibilidad de ir al inicio.
+✔La aplicación contiene un Footer y Header.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# News Searcher
+✔Este proyecto basa sus resultados en el EP everything de la API NewsAPI https://newsapi.org/docs/endpoints/everything.

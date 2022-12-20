@@ -37,7 +37,7 @@ const SearcherScreen = () => {
   const [error, setError] = useState(null);
   const [count, setCount] = useState(-1);
   const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
 
   const { view, appContainer, noResults } = useStyles();
 

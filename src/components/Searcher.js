@@ -65,6 +65,7 @@ const Searcher = ({
   return (
     <Box className={searcherContainer}>
       <TextField
+        role="input"
         placeholder="Ingresa un mínimo de 3 caracteres para comenzar a buscar..."
         variant="outlined"
         className={searcherInput}
@@ -76,6 +77,7 @@ const Searcher = ({
         disabled={!search || search.trim().length < 3}
         className={searcherButton}
         onClick={onSearch}
+        role="button"
       >
         Buscar
       </Button>

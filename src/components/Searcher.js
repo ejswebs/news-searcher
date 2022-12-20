@@ -7,8 +7,10 @@ const useStyles = makeStyles({
     padding: "20px 10px",
     display: "flex",
     justifyContent: "center",
-    gap: "10px",
-    width: "40%",
+    alignItems: ({ home }) => (home ? "center" : "start"),
+    flexDirection: ({ home }) => (home ? "column" : "row"),
+    gap: ({ home }) => (home ? "20px" : "10px"),
+    width: ({ home }) => (home ? "50%" : "40%"),
   },
   searcherInput: {
     width: "80%",
@@ -21,6 +23,7 @@ const useStyles = makeStyles({
   },
   searcherButton: {
     height: "30px",
+    width: ({ home }) => (home ? "50%" : ""),
     backgroundColor: "white",
     "& :hover": {
       color: "white",
@@ -29,30 +32,48 @@ const useStyles = makeStyles({
 });
 
 const Searcher = ({
+  count,
   setArticles,
   setLoading,
   setError,
   setCount,
   search,
   setSearch,
+  home,
 }) => {
-  const { searcherInput, searcherContainer, searcherButton } = useStyles();
+  const { searcherInput, searcherContainer, searcherButton } = useStyles({
+    home,
+  });
 
   const onSearch = () => {
     setLoading(true);
     newsQuery({ search, setArticles, setLoading, setError, setCount });
   };
 
+  const onChange = (e) => {
+    count === 0 && setCount(-1);
+    setSearch(e.target.value);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      onSearch();
+    }
+  };
+
   return (
     <Box className={searcherContainer}>
       <TextField
+        placeholder="Ingresa un mínimo de 3 caracteres para comenzar a buscar..."
         variant="outlined"
         className={searcherInput}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
       ></TextField>
       <Button
-        disabled={!search || search.length < 3}
+        disabled={!search || search.trim().length < 3}
         className={searcherButton}
         onClick={onSearch}
       >

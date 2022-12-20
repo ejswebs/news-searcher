@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-import {
-  Box,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 
 import Spinner from "./Spinner";
@@ -29,11 +25,15 @@ const useStyles = makeStyles({
   paginationContainer: {
     display: "flex",
     justifyContent: "space-between",
-    width: "100%",
+    width: "80vw",
     padding: "0 30px",
     boxSizing: "border-box",
   },
-  resultsBox: { overflow: "auto" },
+  resultsBox: {
+    width: "80vw",
+    boxSizing: "border-box",
+    overflow: "auto",
+  },
 });
 
 const ResultsTable = ({ articles, loading, error, count }) => {

@@ -17,6 +17,7 @@ const useStyles = makeStyles({
 
 const Header = ({
   count,
+  home,
   setArticles,
   setLoading,
   setError,
@@ -24,11 +25,13 @@ const Header = ({
   search,
   setSearch,
 }) => {
-  const { navBar, logoStyle } = useStyles();
+  const { navBar, logoStyle } = useStyles({ home });
 
   return (
     <AppBar position="static" className={navBar}>
-      <img className={logoStyle} src={logo} alt="news-searcher logo" />
+      <a href="/">
+        <img className={logoStyle} src={logo} alt="news-searcher logo" />
+      </a>
       {count && (
         <Searcher
           setArticles={setArticles}

@@ -8,7 +8,7 @@ export const newsQuery = async ({
   setLoading(true);
 
   const API_KEY = "f594ddf8def94bcbad45f3bf22049f5b";
-  const url = `https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}&language=es`;
+  const url = `https://newsapi.org/v2/everything?q=${search.trim()}&apiKey=${API_KEY}&language=es`;
 
   const response = await fetch(url);
   const data = await response.json();

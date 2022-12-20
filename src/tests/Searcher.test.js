@@ -16,7 +16,7 @@ describe("<Searcher/>", () => {
     expect(searcher.container).toBeInTheDocument();
   });
 
-  test("Searcher contiene placeholder", () => {
+  test("Searcher contiene input", () => {
     const searcher = renderSearcher();
     const input = searcher.getByRole("input");
 
